@@ -6,7 +6,7 @@
 #if defined (__GNU__)
 #define PACKED __attribute__((packed))
 #else
-#define PACKED
+#define PACKED 
 #endif
 
 
@@ -75,17 +75,20 @@ void queueInsert(queue * q, node * n) {
         }  */
 }
 
-void queueRemove(queue * q, node * retrievedNode) {
-    node * rmv;
+void queueRemove(queue * q, queuedData * retrievedData) {
+    node * node_ptr;
+    queuedData * node_data_ptr;
     if (q->head == NULL) {
         printf("Fail. Queue is empty\n\r");
     }
     else {
-        memcpy(retrievedNode, q -> head, sizeof(node));  // Copy to provided pointer
-        retrievedNode ->next = NULL;
-        rmv = q->head;
+        memcpy(retrievedData, q->head->data, sizeof(queuedData));
+        //memcpy(retrievedNode, q -> head, sizeof(node));  // Copy to provided pointer
+        node_ptr = q->head;
+        node_data_ptr = q->head->data;  // IMPORTANT, not only free up node's memory but also node's data
         q->head = (node *) q->head->next; // Update head
-        free(rmv);
+        free(node_ptr);
+        free(node_data_ptr);
     }
 }
 
@@ -132,11 +135,12 @@ int main () {
         .yaw = 195,
     };
     queueInsert(&beaconQueue, createNode(&data3));
-
-    node retrievedNode;
+ 
+    queuedData retrievedData;
+   
     while (beaconQueue.head != NULL) {
-        queueRemove(&beaconQueue, &retrievedNode);
-        printf("Barrel ID: %d\n\r", retrievedNode.data->barrelID);
+        queueRemove(&beaconQueue, &retrievedData);
+        printf("Barrel ID: %d\n\r", retrievedData.barrelID);
     }
 
     queuedData data4 = {
@@ -177,8 +181,8 @@ int main () {
 
 
     while (beaconQueue.head != NULL) {
-        queueRemove(&beaconQueue, &retrievedNode);
-        printf("Barrel ID: %d\n\r", retrievedNode.data->barrelID);
+        queueRemove(&beaconQueue, &retrievedData);
+        printf("Barrel ID: %d\n\r", retrievedData.barrelID);
     }
 /*
     queueRemove(&beaconQueue, &retrievedNode);
