@@ -1,3 +1,7 @@
+/**
+ * Queue implemented using an array instead of linked list.
+ */
+
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdio.h>
