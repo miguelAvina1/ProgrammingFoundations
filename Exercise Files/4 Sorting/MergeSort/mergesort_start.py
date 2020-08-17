@@ -62,6 +62,6 @@ if __name__ == "__main__":
             
     
 # test the merge sort with data
-#print(import_list)
-#mergesort(import_list)
-#print(import_list)
+print(import_list)
+mergesort(import_list)
+print(import_list)

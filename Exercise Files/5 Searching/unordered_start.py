@@ -5,7 +5,10 @@
 items = [6, 20, 8, 19, 56, 23, 87, 41, 49, 53]
 
 def find_item(item, itemlist):
-    pass
+    for index, n in enumerate(itemlist):
+        if n == item:
+            return index
+    return None
 
 
 print(find_item(87, items))

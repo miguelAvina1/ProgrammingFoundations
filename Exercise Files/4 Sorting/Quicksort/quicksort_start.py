@@ -1,7 +1,7 @@
 # Implement a quicksort
 
 
-items = [20, 6, 8, 53, 56, 23, 87, 41, 49, 19]
+items = [1, 6, 8, 53, 56, 23, 87, 41, 49, 19]
 
 
 def quickSort(dataset, first, last):
@@ -25,11 +25,18 @@ def partition(datavalues, first, last):
     done = False
     while not done:
         # TODO: advance the lower index
-
+        while(lower <= upper and datavalues[lower] < pivotvalue) :
+            lower += 1
         # TODO: advance the upper index
-
+        while(upper >= lower and datavalues[upper] > pivotvalue):
+            upper -= 1
         # TODO: if the two indexes cross, we have found the split point
-        pass
+        if (upper < lower) :
+            done = True
+        else:
+            temp = datavalues[upper]
+            datavalues[upper] = datavalues[lower]
+            datavalues[lower] = temp
 
     # when the split point is found, exchange the pivot value
     temp = datavalues[first]
